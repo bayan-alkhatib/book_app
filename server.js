@@ -20,9 +20,9 @@ function booksSearchHand (req,res){
     .then(booksData=>{
       let volumeInfoArr=booksData.body.items.volumeInfo;
       let newBookInstance= volumeInfoArr.map(element=>{
+        console.log('new book ',newBookInstance);
         return new BOOKS(element);
       });
-      console.log(volumeInfoArr);
       // if(newBookInstance.title===null ) newBookInstance.title='Not Found';
       // if (newBookInstance.author===null) newBookInstance.author='Not Found';
       // if(newBookInstance.descripition===null) newBookInstance.descripition='Not Found';
@@ -62,6 +62,6 @@ function BOOKS(element) {
 
 
 server.listen(PORT, ()=>{
-  console.log(`listion to port ${PORT}`);
+  console.log(`listen to port ${PORT}`);
 });
 
