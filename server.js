@@ -12,23 +12,25 @@ server.set('view engine','ejs');
 server.use(express.static('./public'));
 server.use(express.urlencoded({extended:true}));
 
-// https://www.googleapis.com/books/v1/volumes?q=search+${q}:${search}&maxResults=10`
+
+
 function booksSearchHand (req,res){
   let bookSearchInput=req.body.search_query;
   let bookUrl=`https://www.googleapis.com/books/v1/volumes?q=${bookSearchInput}&maxResults=10`;
   superagent.get(bookUrl)
     .then(booksData=>{
-      let volumeInfoArr=booksData.body.items.volumeInfo;
+      let volumeInfoArr=booksData.body.items;
+      // console.log(volumeInfoArr,volumeInfoArr.length);
       let newBookInstance= volumeInfoArr.map(element=>{
-        return new BOOKS(element);
+        console.log (new BOOKS(element));
+        // console.log('i am working');
+        // console.log('E',element,idx);
+        // console.log (new BOOKS(element));
+        // console.log('new book',newBookInstance);
       });
-      console.log(volumeInfoArr);
-      // if(newBookInstance.title===null ) newBookInstance.title='Not Found';
-      // if (newBookInstance.author===null) newBookInstance.author='Not Found';
-      // if(newBookInstance.descripition===null) newBookInstance.descripition='Not Found';
-      // if( newBookInstance.image_url===null) newBookInstance.image_url= 'https://i.imgur.com/J5LVHEL.jpg';
-      res.render('Iam working');
-      res.render('pages/searches/show',{bookinstance:newBookInstance});
+      console.log('new book2',newBookInstance);
+      res.send('Iam working');
+      // res.render('pages/searches/show',{bookinstance:newBookInstance});
     })
     .catch(()=>{
       res.render('pages/error');
@@ -53,15 +55,15 @@ server.get('*', (req,res)=>{
 });
 
 
-function BOOKS(element) {
-  this.image_url=element.imageLinks;
-  this.title=element.title;
-  this.author=element.authors[0];
-  this.descripition=element.description;
+function BOOKS(value) {
+  this.image_url=value.volumeInfo.imageLinks.thumbnail || `https://i.imgur.com/J5LVHEL.jpg`;
+  this.title=value.volumeInfo.title || 'Not Found';
+  this.author=value.volumeInfo.authors || 'Not Found';
+  this.descripition=value.volumeInfo.description || 'Not Found';
 }
 
 
 server.listen(PORT, ()=>{
-  console.log(`listion to port ${PORT}`);
+  console.log(`listen to port ${PORT}`);
 });
 
