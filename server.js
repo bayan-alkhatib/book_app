@@ -15,7 +15,7 @@ server.use(express.urlencoded({extended:true}));
 // https://www.googleapis.com/books/v1/volumes?q=search+${q}:${search}&maxResults=10`
 function booksSearchHand (req,res){
   let bookSearchInput=req.body.search_query;
-  
+  let bookUrl=`https://www.googleapis.com/books/v1/volumes?q=${bookSearchInput}&maxResults=10`;
   superagent.get(bookUrl)
     .then(booksData=>{
       let volumeInfoArr=booksData.body.items.volumeInfo;
