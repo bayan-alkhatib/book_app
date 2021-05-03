@@ -7,9 +7,15 @@
     <title>Document</title>
 </head>
 <body>
-   <select name="search_fields" id="">
-       <option value="title">Title</option>
-       <option value="author">Author</option>
-   </select> 
+    <form action="/searches" method="POST">
+        <input type="text" name='search_query'>
+        <select name="search_fields" >
+            <option value="title">Title</option>
+            <option value="author">Author</option>
+        </select> 
+        <button>Submit</button>
+    </form>
+   
+
 </body>
 </html>

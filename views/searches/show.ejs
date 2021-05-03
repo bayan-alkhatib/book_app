@@ -11,10 +11,12 @@
     <header></header>
     <main>
         <section>
-            <img src= '<% newBookInstance.image_url %> ' alt="">
-            <h1> <% newBookInstance.title %></h1>
-            <h2> <% newBookInstance.author %> </h2>
-            <p>  <% newBookInstance.descripition %> </p>
+            <% ewBookInstance.forEach(element=>{%>
+            <img src= ' %= newBookInstance.image_url %> ' alt="">
+            <h1> <%= newBookInstance.title %></h1>
+            <h2> <%= newBookInstance.author %> </h2>
+            <p>  <%= newBookInstance.descripition %> </p>
+        }) %>
         </section>
     </main>
 </body>
