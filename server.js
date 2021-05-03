@@ -3,6 +3,7 @@ require('dotenv').config();
 const express=require('express');
 const superagent=require('superagent');
 const cors= require('cors');
+const pg = require('pg');
 
 
 const PORT=process.env.PORT || 3000;
@@ -11,6 +12,9 @@ server.use(cors());
 server.set('view engine','ejs');
 server.use(express.static('./public'));
 server.use(express.urlencoded({extended:true}));
+const client = new pg.Client(process.env.DATABASE_URL);
+
+
 
 // https://www.googleapis.com/books/v1/volumes?q=search+${q}:${search}&maxResults=10`
 function booksSearchHand (req,res){
