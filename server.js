@@ -22,7 +22,6 @@ function booksSearchHand (req,res){
     .then(booksData=>{
       let volumeInfoArr=booksData.body;
       let newBookInstance= volumeInfoArr.items.map(element=>{
-        console.log (new BOOKS(element));
         return new BOOKS(element);
       });
       res.render('searches/show',{bookinstance:newBookInstance});

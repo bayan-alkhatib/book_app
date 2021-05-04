@@ -23,3 +23,20 @@ header div{
 .searchT, .searchA{
     background-color: rgb(206, 197, 197);
 }
+
+section h1{
+    color: white;
+}
+
+section{
+    background-color:rgb(204, 204, 204) ;
+}
+
+button{
+    background-color: black;
+    color: white;
+}
+
+footer {
+    background-color: rgb(2, 2, 2);
+}

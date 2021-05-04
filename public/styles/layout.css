@@ -1,10 +1,10 @@
+@media (max-width:450px){
 header{
     width: 100%;
 }
 footer {
     padding:40px 0;
     width: 100%;
-    background-color: rgb(2, 2, 2);
 }
 
 main {
@@ -28,6 +28,7 @@ input[type=text]{
     height: 15vh;
     width:99.25%;
     font-size:20px ;
+    border-radius:10px ;
 
 }
 
@@ -36,7 +37,7 @@ input[type=text]{
     display: flex;
     align-items: center;
     justify-content: left;
-    text-align: left;
+    border-radius:10px ;
 }
 
 button{
@@ -45,9 +46,8 @@ button{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: black;
-    color: white;
     font-size:20px ;
+    border-radius:10px ;
 }
 
 br {
@@ -57,19 +57,57 @@ br {
 }
 
 label{
-    width:12%;
     font-size: 25px;
     margin-left:20px ;
+    
 }
 
 input[type=radio]{
-  margin-left:0px;
-  width: 87%;
+  margin-left:25px;
 }
 
+#title{
+    margin-left:45px;
+}
 
+section{
+    width:80%;
+    margin: 60px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
+section *{
+    margin:15px 20px;
+}
 
+section img {
+    width: 50%;
+    height:60% ;
+    margin-top:50px ;
+}
+
+section h1{
+    font-weight: bold;
+    font-size: x-large;
+    text-align: center;
+}
+
+section h2{
+    font-style: italic;
+    font-weight: bolder;
+    font-size:larger;
+    text-align: center;
+}
+
+section p{
+    margin-bottom:50px ;
+    text-align: center;
+}
+
+}
 
 
 
