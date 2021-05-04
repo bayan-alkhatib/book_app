@@ -1,0 +1,76 @@
+header{
+    width: 100%;
+}
+footer {
+    padding:40px 0;
+    width: 100%;
+    background-color: rgb(2, 2, 2);
+}
+
+main {
+    min-height: 70vh;
+    width:100%;
+}
+
+form {
+    width: 80%;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+form *{
+    margin-bottom:20px;
+}
+
+input[type=text]{
+    height: 15vh;
+    width:99.25%;
+    font-size:20px ;
+
+}
+
+.searchT, .searchA{
+    height: 15vh;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    text-align: left;
+}
+
+button{
+    height: 15vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color: white;
+    font-size:20px ;
+}
+
+br {
+    width:0;
+    margin:0;
+    padding:0;
+}
+
+label{
+    width:12%;
+    font-size: 25px;
+    margin-left:20px ;
+}
+
+input[type=radio]{
+  margin-left:0px;
+  width: 87%;
+}
+
+
+
+
+
+
+
+

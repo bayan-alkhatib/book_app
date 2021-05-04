@@ -5,16 +5,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./styles/style.css">
 </head>
 <body>
-    <form action="/searches" method="POST">
-        <input type="text" name='search_query'>
-        <select name="search_fields" >
-            <option value="title">Title</option>
-            <option value="author">Author</option>
-        </select> 
-        <button>Submit</button>
-    </form>
+    <header>
+        <nav>
+            Best Books!
+        </nav>
+        <div>
+            Search By Title or Auther
+        </div>
+    </header>
+    <main>
+        <form action="/searches" method="POST">
+
+        <input type="text" name='search_query' placeholder=" Enter aTitle or Author ">
+        <div class='searchT'>
+            <label for="title">Title</label>
+            <input type="radio" value="title" id="title" name="search_fields"><br>
+        </div>
+        <div class='searchA'>
+            <label for="author">Author</label>
+            <input type="radio" value="author" id="author" name=search_fields"><br>
+        </div>
+        <button>Search The Google Books API</button>
+        </form>
+    </main>
+    <footer>
+
+    </footer>
+    
    
 
 </body>
