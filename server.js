@@ -10,21 +10,20 @@ const server=express();
 server.use(cors());
 server.set('view engine','ejs');
 server.use(express.static('./public'));
+server.use(express.urlencoded({extended:true}));
+
 
 
 function booksSearchHand (req,res){
-  let bookSearchInput=req.query.search_query;
-  let bookUrl=` https://www.googleapis.com/books/v1/volumes?q=${bookSearchInput}&maxResults=10`;
-  superagent.post(bookUrl)
+  let bookSearchInput=req.body.search_query;
+  let search=req.body.search_fields;
+  let bookUrl=`https://www.googleapis.com/books/v1/volumes?q=+${bookSearchInput}:${search}`;
+  superagent.get(bookUrl)
     .then(booksData=>{
-      let volumeInfoArr=booksData.body.items.volumeInfo;
-      let newBookInstance= volumeInfoArr.map(element=>{
+      let volumeInfoArr=booksData.body;
+      let newBookInstance= volumeInfoArr.items.map(element=>{
         return new BOOKS(element);
       });
-      if(newBookInstance.title===null ) newBookInstance.title='Not Found';
-      if (newBookInstance.author===null) newBookInstance.author='Not Found';
-      if(newBookInstance.descripition===null) newBookInstance.descripition='Not Found';
-      if( newBookInstance.image_url===null) newBookInstance.image_url= 'https://i.imgur.com/J5LVHEL.jpg';
       res.render('searches/show',{bookinstance:newBookInstance});
     })
     .catch(()=>{
@@ -34,10 +33,6 @@ function booksSearchHand (req,res){
 
 
 
-server.get('*', (req,res)=>{
-  res.render('pages/error');
-});
-
 server.get('/',(req,res)=>{
   res.render('pages/index');
 });
@@ -46,18 +41,23 @@ server.get('/new',(req,res)=>{
   res.render('searches/new');
 });
 
-server.post('/searches',booksSearchHand);
+server.post('/searches',booksSearchHand );
 
 
-function BOOKS(element) {
-  this.image_url=element.imageLinks;
-  this.title=element.title;
-  this.author=element.authors[0];
-  this.descripition=element.description;
+server.get('*', (req,res)=>{
+  res.render('pages/error');
+});
+
+
+function BOOKS(value) {
+  this.image_url=value.volumeInfo.imageLinks.thumbnail || `https://i.imgur.com/J5LVHEL.jpg`;
+  this.title=value.volumeInfo.title || 'Not Found';
+  this.author=value.volumeInfo.authors || 'Not Found';
+  this.descripition=value.volumeInfo.description || 'Not Found';
 }
 
 
 server.listen(PORT, ()=>{
-  console.log(`listion to port ${PORT}`);
+  console.log(`listen to port ${PORT}`);
 });
 

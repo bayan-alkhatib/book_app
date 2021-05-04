@@ -1,5 +1,42 @@
-header{
-    background-color: cornflowerblue;
-    padding: 30px;
+header nav {
+    background-color: rgb(2, 2, 2);
+    padding: 40px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size:30px;
 }
 
+header div{
+    background-color: rgb(105, 104, 104); 
+    padding: 30px;
+    color:white;
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+    font-size:20px;
+}
+
+.searchT, .searchA{
+    background-color: rgb(206, 197, 197);
+}
+
+section h1{
+    color: white;
+}
+
+section{
+    background-color:rgb(204, 204, 204) ;
+}
+
+button{
+    background-color: black;
+    color: white;
+}
+
+footer {
+    background-color: rgb(2, 2, 2);
+}
