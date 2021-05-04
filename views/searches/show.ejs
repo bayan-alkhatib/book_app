@@ -10,14 +10,14 @@
 <body>
     <header></header>
     <main>
-        <section>
-            <% newBookInstance.forEach(element=>{%>
-            <img src= ' %= newBookInstance.image_url %> ' alt="">
-            <h1> <%= newBookInstance.title %></h1>
-            <h2> <%= newBookInstance.author %> </h2>
-            <p>  <%= newBookInstance.descripition %> </p>
-        }) %>
-        </section>
+        <div>
+            <% bookinstance.forEach(element=>{%>
+            <img src= "<%= element.image_url %> " alt="">
+            <h1> <%= element.title %></h1>
+            <h2> <%= element.author %> </h2>
+            <p>  <%= element.descripition %> </p>
+        <% }) %>
+            </div>
     </main>
 </body>
 </html>

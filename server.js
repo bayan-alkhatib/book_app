@@ -16,21 +16,16 @@ server.use(express.urlencoded({extended:true}));
 
 function booksSearchHand (req,res){
   let bookSearchInput=req.body.search_query;
-  let bookUrl=`https://www.googleapis.com/books/v1/volumes?q=${bookSearchInput}&maxResults=10`;
+  let search=req.body.search_fields;
+  let bookUrl=`https://www.googleapis.com/books/v1/volumes?q=+${bookSearchInput}:${search}`;
   superagent.get(bookUrl)
     .then(booksData=>{
-      let volumeInfoArr=booksData.body.items;
-      // console.log(volumeInfoArr,volumeInfoArr.length);
-      let newBookInstance= volumeInfoArr.map(element=>{
+      let volumeInfoArr=booksData.body;
+      let newBookInstance= volumeInfoArr.items.map(element=>{
         console.log (new BOOKS(element));
-        // console.log('i am working');
-        // console.log('E',element,idx);
-        // console.log (new BOOKS(element));
-        // console.log('new book',newBookInstance);
+        return new BOOKS(element);
       });
-      console.log('new book2',newBookInstance);
-      res.send('Iam working');
-      // res.render('pages/searches/show',{bookinstance:newBookInstance});
+      res.render('searches/show',{bookinstance:newBookInstance});
     })
     .catch(()=>{
       res.render('pages/error');
