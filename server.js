@@ -22,6 +22,7 @@ function booksSearchHand (req,res){
   superagent.get(bookUrl)
     .then(booksData=>{
       let volumeInfoArr=booksData.body;
+      console.log(volumeInfoArr);
       let newBookInstance= volumeInfoArr.items.map(element=>{
         return new BOOKS(element);
       });
