@@ -1,7 +1,8 @@
-@media (max-width:450px){
+/* @media (max-width:450px){ */
 header{
     width: 100%;
 }
+
 footer {
     padding:40px 0;
     width: 100%;
@@ -103,11 +104,18 @@ section h2{
 }
 
 section p{
-    margin-bottom:50px ;
+    margin-bottom:30px ;
     text-align: center;
 }
 
+#homeNav {
+    display: flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:10px ;
+
 }
+/* } */
 
 
 

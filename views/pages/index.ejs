@@ -12,14 +12,29 @@
         <nav>
             Best Books!
         </nav>
-        <div>
+        <div  id='mainheaderdiv'>
+        <div id=homeNav>
+            <a href="/">Home</a>
+            <a href="new"> Search Book </a>
         </div>
+       </div>
     </header>
     <main>
-        <form action="/new" method= 'GET'>
-            <button>Go to Search Page </button>
-        </form>
-       
+      
+        <h2 id='booksNum'> You Have <%= books.length%> Books in your Collection</h2>
+        
+            <%books.forEach(element=>{ %>
+                <section>
+            <img src= "<%= element.image_url %> "alt="">
+            <h1> <%= element.title %></h1>
+            <h2><%= element.isbn %> </h2>
+            <h2><%= element.author %> </h2>
+            <form action="/book/<%=element.id%>" method= 'GET'>
+            <button> View Details </button>
+            </form>
+        </section>
+       <% }) %>
+        
     </main>
 </body>
 </html>

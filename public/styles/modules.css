@@ -9,7 +9,7 @@ header nav {
     font-size:30px;
 }
 
-header div{
+#mainheaderdiv{
     background-color: rgb(105, 104, 104); 
     padding: 30px;
     color:white;
@@ -37,6 +37,19 @@ button{
     color: white;
 }
 
+#booksNum{
+    margin: 30px;
+    font-size:x-large ;
+    font-weight: bolder;
+    text-align:center ;
+}
+
+#homeNav a {
+    text-decoration: none;
+    margin-right:30px ;
+    color: white;
+    font-weight: bolder;
+}
 footer {
     background-color: rgb(2, 2, 2);
 }
