@@ -30,7 +30,19 @@ input[type=text]{
     width:99.25%;
     font-size:20px ;
     border-radius:10px ;
+    overflow-wrap: break-word;
 
+}
+
+#formBtn{
+    width:50%;
+}
+
+textarea{
+    width:99.25%;
+    font-size:20px ;
+    border-radius:10px;
+    color: black;
 }
 
 .searchT, .searchA{
@@ -114,6 +126,25 @@ section p{
     align-items:center;
     margin-top:10px ;
 
+}
+
+article{
+    width:100%;
+    display: flex;
+    justify-content: space-around;
+
+}
+article *{
+   width:50%; 
+}
+
+ article aside{
+    display: flex;
+    justify-content:center;
+}
+article form{
+    display: flex;
+    justify-content:center;
 }
 /* } */
 
