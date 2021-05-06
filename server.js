@@ -3,6 +3,7 @@ require('dotenv').config();
 const express=require('express');
 const superagent=require('superagent');
 const cors= require('cors');
+const methodOverride=require('method-override');
 const pg= require('pg');
 
 
@@ -12,6 +13,7 @@ server.use(cors());
 server.set('view engine','ejs');
 server.use(express.static('./public'));
 server.use(express.urlencoded({extended:true}));
+server.use(methodOverride('_method'));
 let client = new pg.Client((process.env.DATABASE_URL));
 
 
@@ -44,7 +46,7 @@ function homePageHandeler (req,res){
 
 function selectedBookHand (req,res){
   let {title,author,description,isbn,image_url,bookshelf}=req.body;
-  let sql= `insert into books (title,author,description,isbn,image_url,bookshelf) values ($1,$2,$3,$4,$5,$6) Returning *;`;
+  let sql=`insert into books (title,author,description,isbn,image_url,bookshelf) values ($1,$2,$3,$4,$5,$6) Returning *;`;
   let safeValues=[title,author,description,isbn,image_url,bookshelf];
   client.query(sql,safeValues)
     .then(result=>{
@@ -61,14 +63,37 @@ function idbookhandeler(req,res){
     });
 }
 
+function updateHand(req,res){
+  console.log(req.body);
+  let data = Object.values(req.body);
+  data[6] = parseInt(data[6]);
+  let query = `UPDATE books  SET  title = $1, author = $2, isbn = $3, image_url=$4, description = $5, bookshelf=$6 WHERE id = $7;`;
+  client.query(query,data)
+    .then(() => {
+      res.redirect(`/book/${data[6]}`);
+    });
+}
+
+
+
+function deleteBookHand(req,res){
+  let sql=`delete from books where id=$1;`;
+  let safeValues=[req.params.id];
+  client.query(sql,safeValues)
+    .then (()=>{
+      res.redirect('/');
+    });
+}
 
 server.get('/',homePageHandeler);
-server.get('/new',(req,res)=>{
-  res.render('searches/new');
-});
 server.post('/searches',booksSearchHand);
 server.post('/book',selectedBookHand);
 server.get('/book/:id',idbookhandeler);
+server.put('/update/:id',updateHand);
+server.delete('/delete/:id',deleteBookHand);
+server.get('/new',(req,res)=>{
+  res.render('searches/new');
+});
 server.get('*', (req,res)=>{
   res.render('pages/error');
 });
