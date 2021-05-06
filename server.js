@@ -74,13 +74,7 @@ function updateHand(req,res){
     });
 }
 
-//   let sql=`update books set title=$1,author=$2,description=$3,isbn=$4,image_url=$5,bookshelf=$6 where id=$7;`;
-//   let safeValues=[req.body.title,req.body.author,req.body.description,req.body.isbn,req.body.image_url,req.body.bookshelf,req.params.id];
-//   client.query(sql,safeValues)
-//     .then(()=>{
-//       res.redirect(`/book/${req.params.id}`);
-//     });
-// }
+
 
 function deleteBookHand(req,res){
   let sql=`delete from books where id=$1;`;
