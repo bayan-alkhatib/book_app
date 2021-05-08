@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            Best Books!
+        </nav>
+        <div  id='mainheaderdiv'>
+            <div id=homeNav>
+                <a href="/">Home</a>
+                <a href="new"> Search Book </a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section>
+            <img src= "<%= bookid.image_url %> " alt="">
+        <h1> <%=  bookid.title %></h1>
+        <h2><%=  bookid.author %> </h2>
+        <p>  <%=  bookid.description%> </p>
+        <p><%=bookid.isbn%></p>
+        <p><%=bookid.bookshelf%></p>
+        <article>
+            <form action="/delete/<%=bookid.id%>?_method=delete" method="POST">
+                <button>delete book</button>
+            </form>
+            <aside>
+                <button id='updatebtn'>update detailes</button>
+            </aside>
+        </article>
+        <%-include('edit') %>
+         </section> 
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src='/app.js'></script>
+</body>
+</html>

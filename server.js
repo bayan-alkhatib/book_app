@@ -16,22 +16,23 @@ const server=express();
 server.use(cors());
 
 // Express middleware
-    // Specify a directory for static resources 
+// Specify a directory for static resources
 server.use(express.static('./public'));
-      //put the form data in req.body
+//put the form data in req.body
 server.use(express.urlencoded({extended:true}));
-    //to use update and delete
+//to use update and delete
 server.use(methodOverride('_method'));
-
-// Database Setup
-let client = new pg.Client((process.env.DATABASE_URL));
 
 // Set the view engine for server-side templating
 server.set('view engine','ejs');
 
+// Database Setup
+let client = new pg.Client({ connectionString:process.env.DATABASE_URL, ssl: { rejectUnauthorized: false }});
+
+
 //Routes
 server.get('/',homePageHandeler);
-server.post('/searches',booksSearchHand);
+server.post('/searches/show',booksSearchHand);
 server.post('/book',selectedBookHand);
 server.get('/book/:id',idbookhandeler);
 server.put('/update/:id',updateHand);
@@ -39,9 +40,7 @@ server.delete('/delete/:id',deleteBookHand);
 server.get('/new',(req,res)=>{
   res.render('searches/new');
 });
-server.get('*', (req,res)=>{
-  res.render('pages/error');
-});
+server.get('*',errorfun);
 
 
 //Handeler Funcrions
@@ -56,7 +55,7 @@ function homePageHandeler (req,res){
 function booksSearchHand (req,res){
   let bookSearchInput=req.body.search_query;
   let search=req.body.search_fields;
-  let bookUrl=`https://www.googleapis.com/books/v1/volumes?q=+in${bookSearchInput}:${search}`;
+  let bookUrl=`https://www.googleapis.com/books/v1/volumes?q=+${bookSearchInput}:${search}`;
   superagent.get(bookUrl)
     .then(booksData=>{
       let volumeInfoArr=booksData.body;
@@ -90,13 +89,12 @@ function idbookhandeler(req,res){
 }
 
 function updateHand(req,res){
-  console.log(req.body);
   let data = Object.values(req.body);
-  data[6] = parseInt(data[6]);
+  let id = parseInt(data[6]);
   let query = `UPDATE books  SET  title = $1, author = $2, isbn = $3, image_url=$4, description = $5, bookshelf=$6 WHERE id = $7;`;
   client.query(query,data)
     .then(() => {
-      res.redirect(`/book/${data[6]}`);
+      res.redirect(`/book/${id}`);
     });
 }
 
@@ -109,6 +107,9 @@ function deleteBookHand(req,res){
     });
 }
 
+let errorfun=((req,res)=>{
+  res.render('pages/error');
+});
 
 // Constructor
 function BOOKS(value) {
